@@ -3,6 +3,8 @@ import os
 from src.classifier.predict import predict as pd
 from src.classifier.config import class_names
 import numpy as np
+import calendar
+import time
 
 app = Flask(__name__)
 
@@ -23,7 +25,8 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     file = request.files['file']
-    filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    ts = calendar.timegm(time.gmtime())
+    filename = os.path.join(app.config['UPLOAD_FOLDER'], '{0}_{1}'.format(ts, file.filename))
     file.save(filename)
     predicted_class = pd(filename)
     print(predicted_class)

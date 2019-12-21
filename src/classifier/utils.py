@@ -82,4 +82,14 @@ def load_image(path):
   image = io.imread(path)
   image = color.rgb2gray(image)
   image = transform.resize(image, (28,28))
+  image = image.reshape(1, 28, 28, 1)
   return image
+
+def load_model():
+  json_file = open(saved_model_json_filename, 'r')
+  model_json = json_file.read()
+  json_file.close()
+  model = tf.keras.models.model_from_json(model_json)
+  model.load_weights(saved_model_filename)
+  model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+  return model

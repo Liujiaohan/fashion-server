@@ -27,7 +27,7 @@ def predict():
     file.save(filename)
     predicted_class = pd(filename)
     print(predicted_class)
-    response = make_response(jsonify({'index': int(predicted_class), 'class_name': class_names[predicted_class]}), 200)
+    response = make_response(jsonify({'class_name': list(predicted_class)}), 200)
     return response
 
 if __name__ == '__main__':

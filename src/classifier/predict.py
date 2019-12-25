@@ -36,6 +36,6 @@ def predict(path):
     # plot_value_array(i, predictions[i],  test_labels)
     # plt.show()
 
-    return predict_class
+    return predict_class, sorted_rate[-1]
 
 #predict('img_predict/yundongxie.jpeg')

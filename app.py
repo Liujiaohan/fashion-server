@@ -28,12 +28,16 @@ def predict():
     file = request.files['file']
     uid = request.form['uid']
     ts = calendar.timegm(time.gmtime())
+    data = {}
     filename = os.path.join(app.config['UPLOAD_FOLDER'], '{0}_{1}'.format(ts, file.filename))
+    data['url'] = filename
     file.save(filename)
     predicted_class, class_index = pd(filename)
     print(predicted_class)
-    dao.add_clothes(uid, filename, int(class_index))
-    response = make_response(jsonify({'status': 'ok', 'class_name': list(predicted_class)}), 200)
+    data['class_name'] = int(class_index)
+    id = dao.add_clothes(uid, filename, int(class_index)).inserted_id
+    data['id'] = str(id)
+    response = make_response(jsonify({'status': 'ok', 'data': data}), 200)
     return response
 
 @app.route('/cloth/update', methods=["POST"])

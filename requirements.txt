@@ -1,0 +1,5 @@
+pymongo
+tensorflow
+flask
+matplotlib
+numpy

@@ -57,10 +57,10 @@ def delete_cloth():
 def find_all_cloth():
     #params = request.json if request.method == "POST" else request.args
     uid = request.form['uid']
-    json = {}
+    data = []
     for class_name in range(0, len(class_names)):
-        json[class_name] = dao.find_all_clothes_by_classname(uid, class_name)
-    response = make_response(jsonify({'status': 'ok', 'data': json}), 200)
+        data.append({'class': class_name, 'list': dao.find_all_clothes_by_classname(uid, class_name)})
+    response = make_response(jsonify({'status': 'ok', 'data': data}), 200)
     return response
 
 if __name__ == '__main__':

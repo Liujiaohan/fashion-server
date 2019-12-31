@@ -28,7 +28,7 @@ def find_all_clothes(uid):
 
 def find_all_clothes_by_classname(uid, class_index):
     all_clothes = []
-    for cloth in clothes.find({"uid": uid, "class_name": class_index}):
+    for cloth in clothes.find({"uid": uid, "class_name": class_index}, {"uid": 0}):
         cloth['_id']= str(cloth['_id'])
         all_clothes.append(cloth)
     return all_clothes

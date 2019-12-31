@@ -36,7 +36,7 @@ def predict():
     print(predicted_class)
     data['class_name'] = int(class_index)
     id = dao.add_clothes(uid, filename, int(class_index)).inserted_id
-    data['id'] = str(id)
+    data['_id'] = str(id)
     response = make_response(jsonify({'status': 'ok', 'data': data}), 200)
     return response
 
